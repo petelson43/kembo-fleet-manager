@@ -1,1 +1,215 @@
-# kembo-fleet-manager
+index.html export default function KemboFleetManagerWeb() { const vehicles = [ { id: 1, model: 'Toyota Hilux', plate: 'LD-23-44-AA', km: '125.000 km', next: 'Revisão em 5 dias', status: 'Ativo', }, { id: 2, model: 'Hyundai HD72', plate: 'LA-90-11-CC', km: '88.000 km', next: 'Troca de óleo pendente', status: 'Urgente', }, ];
+
+const technicians = [ { name: 'Carlos Manuel', role: 'Mecânico', completed: 18, }, { name: 'Paulo Mendes', role: 'Eletricista Auto', completed: 11, }, ];
+
+return ( <div className="min-h-screen bg-zinc-950 text-white flex"> <aside className="w-72 bg-black border-r border-zinc-800 p-6 hidden lg:flex flex-col"> <div> <h1 className="text-3xl font-bold">Kembo Fleet</h1> <p className="text-zinc-400 mt-2 text-sm"> Gestão Inteligente de Oficina </p> </div>
+
+<nav className="mt-10 space-y-3">
+      <SidebarItem label="Dashboard" active />
+      <SidebarItem label="Veículos" />
+      <SidebarItem label="Manutenções" />
+      <SidebarItem label="Técnicos" />
+      <SidebarItem label="Relatórios" />
+      <SidebarItem label="Alertas" />
+      <SidebarItem label="Configurações" />
+    </nav>
+
+    <div className="mt-auto bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+      <p className="text-sm text-zinc-400">Sistema Online</p>
+      <p className="font-semibold mt-1 text-green-400">
+        Backup automático ativo
+      </p>
+    </div>
+  </aside>
+
+  <main className="flex-1 p-5 md:p-8 overflow-auto">
+    <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <h2 className="text-4xl font-bold">
+          Dashboard da Oficina
+        </h2>
+        <p className="text-zinc-400 mt-2">
+          Controle completo da frota e das manutenções.
+        </p>
+      </div>
+
+      <div className="flex gap-3 flex-wrap">
+        <button className="bg-zinc-800 hover:bg-zinc-700 px-5 py-3 rounded-2xl transition">
+          + Veículo
+        </button>
+
+        <button className="bg-blue-600 hover:bg-blue-500 px-5 py-3 rounded-2xl font-semibold transition">
+          + Nova Manutenção
+        </button>
+      </div>
+    </div>
+
+    <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+      <StatsCard title="Veículos Ativos" value="24" />
+      <StatsCard title="Pendentes" value="5" />
+      <StatsCard title="Concluídos Hoje" value="12" />
+      <StatsCard title="Alertas Urgentes" value="2" />
+    </section>
+
+    <section className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+      <div className="xl:col-span-2 bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
+          <h3 className="text-2xl font-semibold">
+            Veículos da Frota
+          </h3>
+
+          <input
+            placeholder="Pesquisar veículo..."
+            className="bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 outline-none"
+          />
+        </div>
+
+        <div className="space-y-4">
+          {vehicles.map((vehicle) => (
+            <div
+              key={vehicle.id}
+              className="bg-zinc-800 rounded-2xl p-5 border border-zinc-700"
+            >
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                  <h4 className="text-xl font-semibold">
+                    {vehicle.model}
+                  </h4>
+
+                  <p className="text-zinc-400 mt-1">
+                    {vehicle.plate}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="font-medium">{vehicle.km}</p>
+                  <p className="text-yellow-400 text-sm mt-1">
+                    {vehicle.next}
+                  </p>
+                </div>
+
+                <div>
+                  <span className="bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm">
+                    {vehicle.status}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+        <h3 className="text-2xl font-semibold mb-5">
+          Técnicos
+        </h3>
+
+        <div className="space-y-4">
+          {technicians.map((tech, index) => (
+            <div
+              key={index}
+              className="bg-zinc-800 border border-zinc-700 rounded-2xl p-4"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-semibold text-lg">
+                    {tech.name}
+                  </h4>
+
+                  <p className="text-zinc-400 text-sm mt-1">
+                    {tech.role}
+                  </p>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-green-400 font-bold text-xl">
+                    {tech.completed}
+                  </p>
+
+                  <p className="text-zinc-500 text-xs">
+                    serviços
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+      <div className="mb-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4">
+        <h3 className="text-xl font-semibold text-blue-400">
+          Sistema Interativo em Tempo Real
+        </h3>
+
+        <p className="text-zinc-300 mt-2">
+          Todas as atualizações feitas pelos técnicos aparecem automaticamente para o gestor e para os outros utilizadores autorizados.
+        </p>
+      </div>
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
+        <div>
+          <h3 className="text-2xl font-semibold">
+            Registrar Manutenção
+          </h3>
+
+          <p className="text-zinc-400 mt-1">
+            Relatórios rápidos para os técnicos.
+          </p>
+        </div>
+
+        <div className="bg-red-500/20 text-red-400 px-4 py-2 rounded-xl">
+          Sistema sincronizado entre técnicos e gestor
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Field label="Veículo" placeholder="Selecionar veículo" />
+        <Field label="Tipo de manutenção" placeholder="Troca de óleo" />
+        <Field label="Técnico responsável" placeholder="Selecionar técnico" />
+        <Field label="Kilometragem" placeholder="125000" />
+      </div>
+
+      <div className="mt-5">
+        <label className="text-sm text-zinc-400 block mb-2">
+          Observações Técnicas
+        </label>
+
+        <textarea
+          className="w-full bg-zinc-800 border border-zinc-700 rounded-2xl p-4 min-h-[140px] outline-none"
+          placeholder="Descreva o serviço realizado..."
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-4 mt-6">
+        <button className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-semibold transition">
+          Salvar Relatório
+        </button>
+
+        <button className="bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          Anexar Fotos
+        </button>
+
+        <button className="bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-2xl transition">
+          Ver Histórico do Veículo
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+); }
+
+function SidebarItem({ label, active }) { return ( <button className={w-full text-left px-5 py-4 rounded-2xl transition ${ active ? 'bg-blue-600 text-white' : 'bg-zinc-900 text-zinc-300 hover:bg-zinc-800' }} > {label} </button> ); }
+
+function StatsCard({ title, value }) { return ( <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-xl"> <p className="text-zinc-400 text-sm">{title}</p> <h3 className="text-5xl font-bold mt-3">{value}</h3> </div> ); }
+
+function Field({ label, placeholder }) { return ( <div> <label className="text-sm text-zinc-400 block mb-2"> {label} </label>
+
+<input
+    placeholder={placeholder}
+    className="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-3 outline-none"
+  />
+</div>
+
+); }
